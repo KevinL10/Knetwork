@@ -1,0 +1,48 @@
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+@font-face {
+  font-family: "Visby";
+  src: url("../assets/visby/VisbyRegular.woff");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Visby";
+  src: url("../assets/visby/VisbyBold.woff");
+  font-weight: 700;
+}
+
+:root {
+  --light-primary: #dafbf0;
+  --light-secondary: #f0fdfb;
+}
+
+a,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+input,
+button,
+div,
+form {
+  font-family: "Visby", "Arial", sans-serif;
+}
+
+.display {
+  font-weight: 700;
+}

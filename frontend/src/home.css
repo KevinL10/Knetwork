@@ -1,0 +1,194 @@
+.display {
+  font-weight: 700;
+}
+
+.navbar {
+  background-color: white;
+  padding: 1rem 0rem;
+}
+
+@media (min-width: 576px) {
+  .navbar {
+    padding: 1rem calc((100% - 540px) / 2);
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar {
+    padding: 1rem calc((100% - 720px) / 2);
+  }
+}
+
+@media (min-width: 992px) {
+  .navbar {
+    padding: 1rem calc((100% - 960px) / 2);
+  }
+}
+
+@media (min-width: 1200px) {
+  .navbar {
+    padding: 1rem calc((100% - 1140px) / 2);
+  }
+}
+
+.navbar-nav {
+  gap: 0.5rem;
+}
+
+.fade-background {
+  background: rgb(192, 247, 242);
+  background: linear-gradient(
+    180deg,
+    rgba(192, 247, 242, 0) 0%,
+    rgba(192, 247, 242, 1) 25%,
+    rgba(192, 247, 242, 1) 75%,
+    rgba(192, 247, 242, 0) 100%
+  );
+  padding: 10rem 0;
+}
+
+.fade-background-green {
+  background: rgb(192, 247, 242);
+  background: linear-gradient(
+    180deg,
+    rgba(192, 247, 242, 0) 0%,
+    rgba(192, 247, 242, 1) 25%,
+    rgba(192, 247, 242, 1) 75%,
+    var(--light-primary) 100%
+  );
+  padding: 10rem 0 3rem;
+}
+
+.sexy-button {
+  position: relative;
+}
+.sexy-button:before {
+  position: absolute;
+  content: "";
+  top: -2px;
+  left: -2px;
+  height: calc(100% + 4px);
+  width: calc(100% + 4px);
+  z-index: -1;
+  opacity: 0;
+  filter: blur(2px);
+  border-radius: 30px;
+  background: linear-gradient(45deg, #84f0ce, #7ed1c6, #c0f7f2, #84f0ce);
+  background-size: 400%;
+  transition: opacity 0.3s ease-in-out;
+  animation: animate 20s linear infinite;
+}
+.sexy-button:hover:before {
+  opacity: 1;
+}
+.sexy-button:hover:active {
+  background: none;
+}
+.sexy-button:hover:active:before {
+  filter: blur(2px);
+}
+@keyframes animate {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+.btn-light {
+  background: white;
+}
+.staggered-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem 2rem;
+  grid-template-rows: repeat(1fr, 6);
+}
+.pricing-card .card-body {
+  text-align: center;
+}
+.pricing-card .card-body ul {
+  text-align: left;
+}
+.staggered-grid-card,
+.pricing-card {
+  padding: 1rem 1rem 1rem 2.5rem;
+  border-radius: 4px;
+  background: inherit;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
+  transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
+    0.3s box-shadow,
+    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
+  cursor: pointer;
+  position: relative;
+}
+.staggered-grid-card:hover,
+.pricing-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
+}
+#pricing-card-highlighted-prim .pricing-card-badge,
+#pricing-card-highlighted-prim {
+  background-color: var(--light-primary);
+}
+#pricing-card-highlighted-sec .pricing-card-badge,
+#pricing-card-highlighted-sec {
+  background-color: var(--light-secondary);
+}
+.staggered-grid-badge {
+  border-radius: 100%;
+  width: 3rem;
+  height: 3rem;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: -1.5rem;
+}
+#staggered-grid-first {
+  grid-row-start: 1;
+  grid-row-end: 3;
+  background-color: var(--light-secondary);
+}
+#staggered-grid-first .staggered-grid-badge,
+#staggered-grid-fourth .staggered-grid-badge {
+  background-color: var(--secondary);
+}
+#staggered-grid-second .staggered-grid-badge,
+#staggered-grid-third .staggered-grid-badge {
+  background-color: var(--primary);
+}
+#staggered-grid-second {
+  grid-row-start: 3;
+  grid-row-end: 5;
+  background-color: var(--light-primary);
+}
+#staggered-grid-third {
+  grid-row-start: 2;
+  grid-row-end: 4;
+  background-color: var(--light-primary);
+}
+#staggered-grid-fourth {
+  grid-row-start: 4;
+  grid-row-end: 6;
+  background-color: var(--light-secondary);
+}
+.pricing-card-badge {
+  border-radius: 100%;
+  width: 3rem;
+  height: 3rem;
+  position: absolute;
+  top: -1.5rem;
+  transform: translateX(-50%);
+  left: 50%;
+  background-color: inherit;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  background-color: white;
+}
+.accordion-button:not(.collapsed) {
+  background-color: var(--light-secondary);
+  color: var(--dark);
+}
