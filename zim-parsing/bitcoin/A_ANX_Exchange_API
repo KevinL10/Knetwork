@@ -1,0 +1,15 @@
+The ANX Exchange API provides methods to access information from account enquiry, market data to placing orders. The primary objective of v2 is to provide transparent compatibility to existing mtgox client. At this moment, we support BTC only. Altcoins support will be added shortly.
+
+
+Version 2 of this API is compatible with MtGox v2 implementation. For general information on the MtGox v2 API see: https://bitbucket.org/nitrous/mtgox-api
+Any MtGox v2 (polling) client should work, by simply changing the base url to https://anxpro.com
+Key differences between MtGox and ANX:
+
+
+
+
+
+
+
+
+ANX Exchange API v2: Official Documentation

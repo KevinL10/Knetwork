@@ -1,0 +1,13 @@
+Bitcoin has been a research topic since the beginning. Here are some peer-reviewed papers, grouped by subject:
+Douglas Stebila (January 26, 2015). "Hierarchical Deterministic Bitcoin wallets that tolerate key leakage". Financial Cryptography and Data Security (2015).
+The paper explains how BIP-32 allows for key leakage if used incorrectly, and proposes an alternate scheme.
+The authors explain covenants, what they are, and what they enable.
+The work by O'Connor et al was integrated into Elements Alpha according to section 1.2 of Bitcoin Covenants: Three Ways to Control the Future by Swambo, Hommel, McElrath, Bishop.
+Brad Denby, Andrew Miller, Giulia Fanti, Surya Bakshi, Shaileshh Bojja Venkatakrishnan, Pramod Viswanath (June 2017). "Dandelion: Redesigning the Bitcoin Network for Anonymity". Proceedings of the Association for Computing Machinery on Measurement and Analysis of Computing Systems.
+Dandelion allows for more anonymous transaction propagation. Unfortunately, it is difficult to implement without enabling DoS attacks, so it hasn't been merged into Bitcoin Core.
+Naumenko, Gleb; Wuille, Pieter (November 2019). "Erlay: Efficient Transaction Relay for Bitcoin". CCS: Proceedings of the ACM SIGSAC Conference on Computer and Communications Security (2019): 817–831. doi:10.1145/3319535.3354237.
+Erlay not only reduces the bandwidth consumption by 40% assuming current connectivity, but also keeps the bandwidth use almost constant as the connectivity increases. In contrast, the existing protocol increases the bandwidth consumption linearly with the number of connections. By allowing more connections at a small cost, Erlay improves the security of the Bitcoin network.
+Maurice Herlihy (18 May 2018). "Atomic Cross-Chain Swaps" (PDF). Proceedings of the Twenty-second Annual Symposium on Principles of Distributed Computing 2018.
+'Cross-chain' means that the swap happens between two different blockchains, e.g. testnet and mainnet. 'Atomic' means that the swap either happens in full, or no swap happens.
+Nicola Atzei, Massimo Bartoletti, Stefano Lande, Roberto Zunino (August 29, 2019). "A formal Model of Bitcoin Transactions". Financial Cryptography and Data Security 2018.
+The paper defines a transaction as a tuple, and time-locks implemented in opcodes are abstracted over. The result is a model that resembles bitcoin but avoids thinking about details like script interpretation. By simplifying the model like this, it can be easier to analyse.

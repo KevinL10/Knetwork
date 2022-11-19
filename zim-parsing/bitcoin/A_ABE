@@ -1,0 +1,2 @@
+Abe is a free, open-source block chain browser released by John Tobey under the Affero General Public License.
+Written in Python and portable SQL,[1] Abe draws inspiration from Bitcoin Block Explorer and seeks some level of compatibility with it but uses a completely new implementation.[2]
