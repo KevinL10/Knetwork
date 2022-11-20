@@ -1,0 +1,82 @@
+.topics-grid {
+  grid-template-rows: masonry;
+  grid-gap: 0.5rem;
+  padding: 0.5rem 0;
+  display: grid;
+  grid-template-columns: minmax(max-content, 1fr);
+}
+
+.topic-card-wrapper {
+  padding: 0.3rem;
+}
+
+.shadow {
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
+}
+
+.topic-card {
+  padding: 1rem;
+  border: 0px;
+  border-radius: 4px;
+  background: inherit;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
+  transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
+    0.3s box-shadow,
+    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: start;
+}
+
+#math-card {
+  background-image: linear-gradient(
+      210deg,
+      rgba(132, 240, 206, 0) 0%,
+      rgba(132, 240, 206, 1) 100%
+    ),
+    url("https://t3.ftcdn.net/jpg/03/05/42/46/360_F_305424600_5q7frtFgzwV3H4X6up5Ja7uM9Gqcm34i.jpg");
+}
+
+.topic-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
+}
+
+.topics-grid a {
+  color: white;
+  transition: 0.3s;
+  text-decoration: none;
+}
+.topics-grid a:hover {
+  color: var(--light-primary);
+}
+
+.topics-grid h3.display {
+  padding-top: 2rem;
+  margin-bottom: 0;
+}
+
+@media (min-width: 576px) {
+  .topics-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 768px) {
+  .topics-grid {
+    grid-template-columns: repeat(2, minmax(max-content, 1fr));
+  }
+}
+
+@media (min-width: 992px) {
+  .topics-grid {
+    grid-template-columns: repeat(3, minmax(max-content, 1fr));
+  }
+}
+
+@media (min-width: 1200px) {
+  .topics-grid {
+    grid-template-columns: repeat(4, minmax(max-content, 1fr));
+  }
+}
