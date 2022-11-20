@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import "./login.css";
 
 const Login = () => {
-  const [isSupervisor, setIsSupervisor] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -24,7 +23,7 @@ const Login = () => {
         body: JSON.stringify({
           username,
           password,
-          userType: isSupervisor ? "supervisor" : "student",
+          userType: "",
         }),
       })
         .then((res) => res.json())
@@ -57,41 +56,6 @@ const Login = () => {
 
             <div className="card-body">
               <h2 className="display">Log in</h2>
-              <div className="btn-group btn-group-toggle" data-toggle="buttons">
-                <p>as... &nbsp;</p>
-                <label
-                  className={
-                    "btn btn-primary" + (isSupervisor ? " active" : "")
-                  }
-                  style={{ borderRadius: "50rem 0 0 50rem" }}
-                >
-                  <input
-                    type="radio"
-                    name="options"
-                    id="option1"
-                    autoComplete="off"
-                    checked={isSupervisor}
-                    onChange={() => setIsSupervisor(true)}
-                  />{" "}
-                  Ksupervisor
-                </label>
-                <label
-                  className={
-                    "btn btn-primary" + (!isSupervisor ? " active" : "")
-                  }
-                  style={{ borderRadius: "0 50rem 50rem 0" }}
-                >
-                  <input
-                    type="radio"
-                    name="options"
-                    id="option2"
-                    autoComplete="off"
-                    checked={!isSupervisor}
-                    onChange={() => setIsSupervisor(false)}
-                  />{" "}
-                  Kstudent
-                </label>
-              </div>
               <div className="input-group mb-3 mt-3">
                 <input
                   type="text"

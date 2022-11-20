@@ -43,7 +43,7 @@ const Sidebar = ({ selected }: { selected: number }) => {
               className={
                 "nav-link link-dark" + (selected === 1 ? " active" : "")
               }
-              onClick={() => navigate("/study", { replace: true })}
+              onClick={() => navigate("/studySplash", { replace: true })}
               role="button"
             >
               <i className="bi bi-file-earmark-plus"></i>
@@ -56,7 +56,7 @@ const Sidebar = ({ selected }: { selected: number }) => {
                 "nav-link link-dark" + (selected === 2 ? " active" : "")
               }
               role="button"
-              onClick={() => navigate("/history", { replace: true })}
+              onClick={() => navigate("/progress", { replace: true })}
             >
               <i className="bi bi-speedometer2"></i>
               &nbsp;Progress
