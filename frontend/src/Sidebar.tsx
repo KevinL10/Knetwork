@@ -8,6 +8,8 @@ const Sidebar = ({ selected }: { selected: number }) => {
 
   const logout = () => {
     ReactSession.set("name", "");
+    ReactSession.set("username", "");
+    ReactSession.set("userType", "");
     ReactSession.set("authentication_token", "");
     navigate("/");
   };
