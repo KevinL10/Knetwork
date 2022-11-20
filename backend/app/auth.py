@@ -30,7 +30,7 @@ def login():
     return jsonify({"status": "success", "message": token, "name": user["name"]})
 
 
-@auth.route("/signup")
+@auth.route("/signup", methods=["POST"])
 def signup():
     username = request.form.get("username")
     name = request.form.get("name")
