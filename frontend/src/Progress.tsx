@@ -1,5 +1,8 @@
-import Question from "./Question";
 import Sidebar from "./Sidebar";
+import { ReactSession } from "react-client-session";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import StudentProgress from "./StudentProgress";
 
 const ICON_MAP: { [key: string]: string } = {
   math: "bi bi-calculator",
@@ -12,6 +15,18 @@ const ICON_MAP: { [key: string]: string } = {
 };
 
 const Progress = () => {
+  const isSupervisor = ReactSession.get("userType") === "supervisor";
+  const navigate = useNavigate();
+  const token = ReactSession.get("authentication_token");
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/");
+    }
+
+    // make API call
+  }, []);
+
   const questions: Array<{
     question: string;
     answer: string;
@@ -22,20 +37,10 @@ const Progress = () => {
     <>
       <div className="d-flex h-100">
         <Sidebar selected={2} />
-        <div className="container mt-5 px-5">
+        <div className="container mt-5 px-5 overflow-auto">
           <h1 className="display text-center mt-5">Progress</h1>
-          <div style={{ maxHeight: "50%" }} className="mt-4">
-            {questions.map((question, i) => (
-              <div className="mb-3">
-                <Question
-                  question={question}
-                  solved={true}
-                  i={-1}
-                  markSolved={(i) => {}}
-                  key={i}
-                />
-              </div>
-            ))}
+          <div style={{ maxHeight: "80%" }} className="mt-4">
+            <StudentProgress />
           </div>
         </div>
       </div>

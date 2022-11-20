@@ -3,17 +3,18 @@ const Question = ({
   solved,
   question,
   markSolved,
-  i,
+  problemId,
 }: {
   solved: boolean;
   question: { question: string; answer: string; reference: string };
-  i: number;
-  markSolved: (i: number) => void;
+  problemId?: string;
+  markSolved?: (i: string) => void;
 }) => {
   return (
     <div
       className={
-        "card study-card shadow mb-3" + (solved ? " study-card-solved" : "")
+        "card study-card shadow shadow-hover mb-3" +
+        (solved ? " study-card-solved" : "")
       }
     >
       {solved ? (
@@ -32,7 +33,7 @@ const Question = ({
           {solved ? null : (
             <button
               className="btn btn-primary rounded-pill"
-              onClick={() => markSolved(i)}
+              onClick={() => markSolved?.(problemId ?? "")}
             >
               Mark solved
             </button>

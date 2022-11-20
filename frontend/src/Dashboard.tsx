@@ -2,9 +2,11 @@ import { ReactSession } from "react-client-session";
 import Sidebar from "./Sidebar";
 import "./dashboard.css";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const Dashboard = () => {
   const name = ReactSession.get("name");
+  const token = ReactSession.get("authentication_token");
 
   const topics = [
     { name: "Math" },
@@ -26,6 +28,32 @@ const Dashboard = () => {
     religion: "fa fa-light fa-cross",
   };
 
+  const [problemsSolved, setProblemsSolved] = useState(-1);
+  useEffect(() => {
+    try {
+      fetch("http://localhost:5000/api/exercises/solved", {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+          "x-auth-token": token,
+        },
+      })
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error();
+          } else {
+            return res.json();
+          }
+        })
+        .then((data) => {
+          if (data.status === "ok") {
+            const solved = Array.from(new Set(data.solved));
+            setProblemsSolved(solved.length);
+          }
+        });
+    } catch {}
+  });
+
   return (
     <>
       <div className="d-flex h-100">
@@ -36,7 +64,10 @@ const Dashboard = () => {
             <div className="col-4">
               <div className="card shadow h-100">
                 <div className="card-body">
-                  <h3 className="display">x problems solved</h3>
+                  <h3 className="display">
+                    {problemsSolved === -1 ? "-" : problemsSolved} problems
+                    solved
+                  </h3>
                 </div>
               </div>
             </div>

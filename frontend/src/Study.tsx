@@ -20,12 +20,17 @@ const Study = ({ topic }: { topic?: string }) => {
   }, []);
 
   const [questions, setQuestions] = useState<
-    Array<{ question: string; answer: string; reference: string }>
+    Array<{
+      question: string;
+      answer: string;
+      reference: string;
+      problemId: string;
+    }>
   >([]);
-  const [solved, setSolved] = useState<Array<number>>([0]);
+  const [solved, setSolved] = useState<Array<string>>([]);
   const [error, setError] = useState("");
 
-  const markSolved = (i: number) => {
+  const markSolved = (i: string) => {
     try {
       fetch("http://localhost:5000/api/exercises/mark", {
         method: "POST",
@@ -59,49 +64,53 @@ const Study = ({ topic }: { topic?: string }) => {
   };
 
   const regenerate = () => {
-    // call API
     setQuestions([]);
     setSolved([]);
+    fetchProblems();
   };
 
   useEffect(() => {
     for (let i = 0; i < 5; i++) {
-      try {
-        fetch(
-          `http://localhost:5000/api/exercises/generate?topic=${location.state.topic}`,
-          {
-            method: "GET",
-            headers: {
-              "content-type": "application/json",
-              "x-auth-token": token,
-            },
-          }
-        )
-          .then((res) => {
-            if (!res.ok) {
-              throw new Error();
-            } else {
-              return res.json();
-            }
-          })
-          .then((data) => {
-            if (data.status === "ok") {
-              setQuestions((prevQuestions) => prevQuestions.concat(data));
-            } else {
-              setError("Couldn't authenticate, please try another password.");
-            }
-          });
-      } catch {
-        setError("Couldn't connect, please try again.");
-      }
+      fetchProblems();
     }
   }, []);
+
+  const fetchProblems = () => {
+    try {
+      fetch(
+        `http://localhost:5000/api/exercises/generate?topic=${location.state.topic}`,
+        {
+          method: "GET",
+          headers: {
+            "content-type": "application/json",
+            "x-auth-token": token,
+          },
+        }
+      )
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error();
+          } else {
+            return res.json();
+          }
+        })
+        .then((data) => {
+          if (data.status === "ok") {
+            setQuestions((prevQuestions) => prevQuestions.concat(data));
+          } else {
+            setError("Couldn't authenticate, please try another password.");
+          }
+        });
+    } catch {
+      setError("Couldn't connect, please try again.");
+    }
+  };
 
   return (
     <>
       <div className="d-flex h-100">
         <Sidebar selected={1} />
-        <div className="container mt-5 pt-5 px-5">
+        <div className="container mt-5 pt-5 px-5 overflow-auto">
           <h1 className="display text-center">
             {topic ? "Studying " + topic + "!" : "Let's learn!"}
           </h1>
@@ -122,21 +131,26 @@ const Study = ({ topic }: { topic?: string }) => {
           {questions.length ? (
             questions.map((question, i) => (
               <Question
-                solved={solved.findIndex((el) => el === i) !== -1}
-                i={i}
+                solved={
+                  solved.findIndex((el) => el === question.problemId) !== -1
+                }
+                problemId={question.problemId}
                 question={question}
                 markSolved={markSolved}
-                key={i}
+                key={question.problemId}
               />
             ))
           ) : (
             <p className="mb-3 display">Loading questions...</p>
           )}
-          <button className="btn btn-light rounded-pill" onClick={regenerate}>
+          <button
+            className="btn btn-light rounded-pill mb-5"
+            onClick={regenerate}
+          >
             Regenerate problems
           </button>
         </div>
-      </div>
+      </div>{" "}
     </>
   );
 };

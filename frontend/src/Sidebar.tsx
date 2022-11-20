@@ -4,6 +4,7 @@ import "./sidebar.css";
 
 const Sidebar = ({ selected }: { selected: number }) => {
   const navigate = useNavigate();
+  const isSupervisor = ReactSession.get("userType") === "supervisor";
 
   const logout = () => {
     ReactSession.set("name", "");
@@ -38,18 +39,20 @@ const Sidebar = ({ selected }: { selected: number }) => {
               &nbsp;Home
             </p>
           </li>
-          <li>
-            <p
-              className={
-                "nav-link link-dark" + (selected === 1 ? " active" : "")
-              }
-              onClick={() => navigate("/studySplash", { replace: true })}
-              role="button"
-            >
-              <i className="bi bi-file-earmark-plus"></i>
-              &nbsp;Start studying
-            </p>
-          </li>
+          {!isSupervisor ? (
+            <li>
+              <p
+                className={
+                  "nav-link link-dark" + (selected === 1 ? " active" : "")
+                }
+                onClick={() => navigate("/studySplash", { replace: true })}
+                role="button"
+              >
+                <i className="bi bi-file-earmark-plus"></i>
+                &nbsp;Start studying
+              </p>
+            </li>
+          ) : null}
           <li>
             <p
               className={
