@@ -9,8 +9,17 @@ exercises = Blueprint("exercises", __name__, template_folder="templates")
 @exercises.route("/generate", methods=["GET"])
 @token_required
 def get_exercise(user):
+    problem = problems.find_one()
     topic = request.json.get("topic")
-    return "random exercise"
+    # TODO: apply spacy to find relevant exercises to the phrase
+    return jsonify(
+        {
+            "status": "ok",
+            "question": problem["question"],
+            "answer": problem["answer"],
+            "reference": problem["reference"],
+        }
+    )
 
 
 # Returns the corresponding question, answer, and reference for a problem ID
@@ -21,7 +30,7 @@ def get_info(user):
     if not id:
         return jsonify({"status": "error", "message": "Please provide a problem ID."})
 
-    problem = problems.find_one({"_id", id})
+    problem = problems.find_one({"problem_id", id})
     if not problem:
         return jsonify({"status": "error", "message": "Invalid problem ID."})
 
@@ -43,7 +52,7 @@ def mark_solved(user):
     if not id:
         return jsonify({"status": "error", "message": "Please provide a problem ID."})
 
-    problem = problems.find_one({"_id", id})
+    problem = problems.find_one({"problem_id", id})
     if not problem:
         return jsonify({"status": "error", "message": "Invalid problem ID."})
 

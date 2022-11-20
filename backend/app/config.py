@@ -8,11 +8,16 @@ def load_secret():
     return os.eviron.get("JWT_SECRET")
 
 
-client = MongoClient("localhost", 27017, username="root", password="rootpassword")
+MONGO_HOST = "localhost"  # if running with docker-compose, should be mongodb
+
+client = MongoClient(MONGO_HOST, 27017, username="root", password="rootpassword")
 db = client.testDB
 users = db.users
 problems = db.problems
+problems.create_index("problem_id")
 
+print(list(problems.find()))
 
 # JWT_SECRET = load_secret()
 JWT_SECRET = "LOCAL_TEST_SECRET"
+DATA_PATH = "data"
