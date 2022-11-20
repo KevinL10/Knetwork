@@ -1,17 +1,140 @@
+import Question from "./Question";
 import Sidebar from "./Sidebar";
+import { useState, useEffect } from "react";
+import "./study.css";
+import "./dashboard.css";
+import { ReactSession } from "react-client-session";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Study = ({ topic }: { topic?: string }) => {
+  const token = ReactSession.get("authentication_token");
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/");
+    }
+
+    // make API call
+  }, []);
+
+  const [questions, setQuestions] = useState<
+    Array<{ question: string; answer: string; reference: string }>
+  >([]);
+  const [solved, setSolved] = useState<Array<number>>([0]);
+  const [error, setError] = useState("");
+
+  const markSolved = (i: number) => {
+    try {
+      fetch("http://localhost:5000/api/exercises/mark", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          "x-auth-token": token,
+        },
+        body: JSON.stringify({
+          problemId: i,
+        }),
+      })
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error();
+          } else {
+            return res.json();
+          }
+        })
+        .then((data) => {
+          if (data.status === "ok") {
+            setSolved((prevSolved) => prevSolved.concat(i));
+          } else {
+            setError(
+              "Couldn't authenticate, please log out and in and try again."
+            );
+          }
+        });
+    } catch {
+      setError("Couldn't connect, please try again.");
+    }
+  };
+
+  const regenerate = () => {
+    // call API
+    setQuestions([]);
+    setSolved([]);
+  };
+
+  useEffect(() => {
+    for (let i = 0; i < 5; i++) {
+      try {
+        fetch(
+          `http://localhost:5000/api/exercises/generate?topic=${location.state.topic}`,
+          {
+            method: "GET",
+            headers: {
+              "content-type": "application/json",
+              "x-auth-token": token,
+            },
+          }
+        )
+          .then((res) => {
+            if (!res.ok) {
+              throw new Error();
+            } else {
+              return res.json();
+            }
+          })
+          .then((data) => {
+            if (data.status === "ok") {
+              setQuestions((prevQuestions) => prevQuestions.concat(data));
+            } else {
+              setError("Couldn't authenticate, please try another password.");
+            }
+          });
+      } catch {
+        setError("Couldn't connect, please try again.");
+      }
+    }
+  }, []);
+
   return (
     <>
       <div className="d-flex h-100">
         <Sidebar selected={1} />
-        <div className="container mt-5 pt-5">
+        <div className="container mt-5 pt-5 px-5">
           <h1 className="display text-center">
             {topic ? "Studying " + topic + "!" : "Let's learn!"}
           </h1>
-          <div className="card" style={{ marginTop: 40 }}>
-            <div className="card-body"></div>
-          </div>
+          {error ? (
+            <p className="text-muted">
+              There was a problem fetching your problems...
+            </p>
+          ) : null}
+          <div
+            className="mt-4"
+            style={{
+              maxHeight: "80%",
+              overflowY: "scroll",
+              overflowX: "hidden",
+            }}
+          ></div>
+
+          {questions.length ? (
+            questions.map((question, i) => (
+              <Question
+                solved={solved.findIndex((el) => el === i) !== -1}
+                i={i}
+                question={question}
+                markSolved={markSolved}
+                key={i}
+              />
+            ))
+          ) : (
+            <p className="mb-3 display">Loading questions...</p>
+          )}
+          <button className="btn btn-light rounded-pill" onClick={regenerate}>
+            Regenerate problems
+          </button>
         </div>
       </div>
     </>

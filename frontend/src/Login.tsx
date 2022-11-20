@@ -26,11 +26,19 @@ const Login = () => {
           userType: "",
         }),
       })
-        .then((res) => res.json())
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error();
+          } else {
+            return res.json();
+          }
+        })
         .then((data) => {
           if (data.status === "success") {
             ReactSession.set("authentication_token", data.message);
             ReactSession.set("name", data.name);
+            ReactSession.set("userType", data.userType);
+            ReactSession.set("username", username);
             navigate("/dashboard");
           } else {
             setError("Couldn't authenticate, please try another password.");
