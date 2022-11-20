@@ -52,6 +52,9 @@ const Signup = () => {
           } else {
             setError("Couldn't create account.");
           }
+        })
+        .catch(() => {
+          setError("Couldn't connect, please try again.");
         });
     } catch {
       setError("Couldn't connect, please try again.");

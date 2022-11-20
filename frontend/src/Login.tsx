@@ -43,6 +43,9 @@ const Login = () => {
           } else {
             setError("Couldn't authenticate, please try another password.");
           }
+        })
+        .catch(() => {
+          setError("Couldn't connect, please try again.");
         });
     } catch {
       setError("Couldn't connect, please try again.");
