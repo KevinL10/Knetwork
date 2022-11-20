@@ -44,7 +44,7 @@ def get_exercises(token):
     r = get(
         "http://localhost:5000/api/exercises/generate",
         headers={"x-auth-token": token},
-        json={"topic": "world war i"},
+        params={"topic": "president", "count":2},
     )
 
     print(r.text)

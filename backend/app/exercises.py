@@ -1,6 +1,10 @@
 from flask import request, Blueprint, jsonify
 from auth import token_required
-from config import users, problems
+from config import users, problems, DATA_PATH
+from utils import find_topic_articles
+from bson.objectid import ObjectId
+import os
+
 
 exercises = Blueprint("exercises", __name__, template_folder="templates")
 
@@ -9,18 +13,27 @@ exercises = Blueprint("exercises", __name__, template_folder="templates")
 @exercises.route("/generate", methods=["GET"])
 @token_required
 def get_exercise(user):
-    problem = problems.find_one()
     topic = request.args.get("topic")
-    # TODO: apply spacy to find relevant exercises to the phrase
-    return jsonify(
+    count = int(request.args.get("count"))
+
+    if not topic:
+        p = problems.find().limit(count)
+    else:
+        articles = find_topic_articles(topic)
+        articles = ["wiki_100/" + a for a in articles]
+        p = problems.find({"reference": {"$in": articles}}).limit(count)
+
+    lst = [
         {
-            "status": "ok",
             "question": problem["question"],
             "answer": problem["answer"],
             "reference": problem["reference"],
-            "problemId": problem["problem_id"]
+            "problemId": str(problem["_id"]),
         }
-    )
+        for problem in p
+    ]
+
+    return jsonify(lst)
 
 
 # Returns the corresponding question, answer, and reference for a problem ID
@@ -31,7 +44,7 @@ def get_info(user):
     if not id:
         return jsonify({"status": "error", "message": "Please provide a problem ID."})
 
-    problem = problems.find_one({"problem_id": id})
+    problem = problems.find_one({"_id": ObjectId(id)})
     if not problem:
         return jsonify({"status": "error", "message": "Invalid problem ID."})
 
@@ -53,7 +66,7 @@ def mark_solved(user):
     if not id:
         return jsonify({"status": "error", "message": "Please provide a problem ID."})
 
-    problem = problems.find_one({"problem_id": id})
+    problem = problems.find_one({"_id": id})
     if not problem:
         return jsonify({"status": "error", "message": "Invalid problem ID."})
 
@@ -75,7 +88,7 @@ def get_solved(user):
 
     return jsonify(
         {
-            "status":"ok",
+            "status": "ok",
             "solved": user["solved"],
         }
     )

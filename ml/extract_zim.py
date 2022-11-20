@@ -25,14 +25,21 @@ def unwrap(filename):
     os.mkdir(prefix)
 
     # download the first 100 for testing;; you can use zim.entry_count-1 for everything
-    for index in range(100):
+    for index in range(zim.entry_count-1):
         entry = zim._get_entry_by_id(index)
-        path = entry.path.replace("/", "_")
+        # entry = zim.get_entry_by_path(entry.path)
+    
+        try:
+            path = entry.get_redirect_entry().path
+        except:
+            path = entry.path
+        path = path.replace("/", "~")
+
         if any([k in path for k in IGNORE]):
             continue
 
+        
         content = extract_content(bytes(entry.get_item().content).decode("UTF-8"))
-        print(f"[x] Writing article {entry.title} to {path}")
         with open(f"{prefix}/{path}", "w") as f:
             f.write("\n".join(content))
 

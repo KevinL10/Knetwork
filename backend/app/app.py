@@ -23,13 +23,13 @@ def create_app():
     app.register_blueprint(auth, url_prefix="/api/auth")
     app.register_blueprint(exercises, url_prefix="/api/exercises")
     app.register_blueprint(settings, url_prefix="/api/settings/")
+    CORS(app)
 
     add_problems()
     return app
 
 
 app = create_app()
-CORS(app)
 
 
 @app.route("/")
