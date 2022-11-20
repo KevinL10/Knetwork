@@ -6,7 +6,7 @@ import jwt
 from settings import JWT_SECRET
 
 auth = Blueprint("auth", __name__, template_folder="templates")
-client = MongoClient("localhost", 27017, username="root", password="rootpassword")
+client = MongoClient("mongodb", 27017, username="root", password="rootpassword")
 users = client.testDB.users
 
 
@@ -21,12 +21,12 @@ def login():
     if user_type not in ("supervisor, student"):
         return jsonify({"status": "error", "message": "Invalid user type"})
 
-    hashed_pw = sha256(password).hexdigest()
+    hashed_pw = sha256(password.encode()).hexdigest()
     user = users.find_one({"username": username, "password": hashed_pw})
     if not user:
         return jsonify({"status": "error", "message": "Invalid username or password"})
 
-    token = jwt.encode({"user": username}, JWT_SECRET, algorithm="HS256").decode()
+    token = jwt.encode({"user": username}, JWT_SECRET, algorithm="HS256")
     return jsonify({"status": "success", "message": token, "name": user["name"]})
 
 
@@ -45,7 +45,7 @@ def signup():
     if users.count_documents({"username": username}):
         return jsonify({"status": "error", "message": "User already exists"})
 
-    hashed_pw = sha256(password).hexdigest()
+    hashed_pw = sha256(password.encode()).hexdigest()
     users.insert_one(
         {
             "username": username,
@@ -56,5 +56,5 @@ def signup():
         }
     )
 
-    token = jwt.encode({"user": username}, JWT_SECRET, algorithm="HS256").decode()
+    token = jwt.encode({"user": username}, JWT_SECRET, algorithm="HS256")
     return jsonify({"status": "success", "message": token})
