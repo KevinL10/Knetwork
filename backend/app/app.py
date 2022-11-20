@@ -1,11 +1,14 @@
 from flask import Flask
-from auth import auth
 from pymongo import MongoClient
 from flask_cors import CORS
+
+from auth import auth
+from exercises import exercises
 
 def create_app():
     app = Flask(__name__)
     app.register_blueprint(auth, url_prefix="/api/auth")
+    app.register_blueprint(exercises, url_prefix="/api/exercises")
     return app
 
 
