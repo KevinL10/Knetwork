@@ -70,15 +70,13 @@ const Study = ({ topic }: { topic?: string }) => {
   };
 
   useEffect(() => {
-    for (let i = 0; i < 5; i++) {
-      fetchProblems();
-    }
+    fetchProblems();
   }, []);
 
   const fetchProblems = () => {
     try {
       fetch(
-        `http://localhost:5000/api/exercises/generate?topic=${location.state.topic}`,
+        `http://localhost:5000/api/exercises/generate?topic=${location.state.topic}&count=5`,
         {
           method: "GET",
           headers: {

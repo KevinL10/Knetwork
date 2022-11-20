@@ -29,7 +29,7 @@
   align-items: start;
 }
 
-#math-card {
+#geometry-card {
   background-image: linear-gradient(
       210deg,
       rgba(132, 240, 206, 0) 0%,
@@ -38,6 +38,104 @@
     url("https://t3.ftcdn.net/jpg/03/05/42/46/360_F_305424600_5q7frtFgzwV3H4X6up5Ja7uM9Gqcm34i.jpg");
 }
 
+#grammar-card {
+  background-image: linear-gradient(
+      210deg,
+      rgba(132, 240, 206, 0) 0%,
+      rgba(132, 240, 206, 1) 100%
+    ),
+    url("https://demmelearning.com/wp-content/uploads/2020/12/How-The-Jabberwocky-Can-Teach-Your-Student-Grammar-.jpg");
+}
+
+#calculus-card {
+  background-image: linear-gradient(
+      210deg,
+      rgba(132, 240, 206, 0) 0%,
+      rgba(132, 240, 206, 1) 100%
+    ),
+    url("https://www.thoughtco.com/thmb/irSi_hwriBZL3QbGsCiiNsgaSWI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/calculus-on-blackboard-79338340-5be4695946e0fb0026d6856f.jpg");
+}
+
+#realanalysis-card {
+  background-image: linear-gradient(
+      210deg,
+      rgba(132, 240, 206, 0) 0%,
+      rgba(132, 240, 206, 1) 100%
+    ),
+    url("https://pll.harvard.edu/sites/default/files/styles/header/public/course/asset-v1_HarvardX%2BCalcAPL1x%2B2T2017%2Btype%40asset%2Bblock%40TITLE-Calculus-Applied-2120x1192-NO-SPOTLIGHT%202.png?itok=crWwjmVi");
+}
+
+#statistics-card {
+  background-image: linear-gradient(
+      210deg,
+      rgba(132, 240, 206, 0) 0%,
+      rgba(132, 240, 206, 1) 100%
+    ),
+    url("https://images.theconversation.com/files/236859/original/file-20180918-158240-1jd9gm6.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=926&fit=clip");
+}
+
+#electrostatics-card {
+  background-image: linear-gradient(
+      210deg,
+      rgba(132, 240, 206, 0) 0%,
+      rgba(132, 240, 206, 1) 100%
+    ),
+    url("https://2.bp.blogspot.com/-tUJ3gyblJoQ/VwCFqy5dYzI/AAAAAAAAASg/2zVByJ-KKPk9NTz-Vx5evWnykPaunXhgw/s1600/bobinas%2B2.jpg");
+}
+
+#civilwar-card {
+  background-image: linear-gradient(
+      210deg,
+      rgba(132, 240, 206, 0) 0%,
+      rgba(132, 240, 206, 1) 100%
+    ),
+    url("https://cdn.britannica.com/13/149613-050-C0B0B8D5/Battle-of-Gettysburg-Currier-lithograph-Ives-July-3-1863.jpg");
+}
+
+#frenchrevolution-card {
+  background-image: linear-gradient(
+      210deg,
+      rgba(132, 240, 206, 0) 0%,
+      rgba(132, 240, 206, 1) 100%
+    ),
+    url("https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Anonymous_-_Prise_de_la_Bastille.jpg/1200px-Anonymous_-_Prise_de_la_Bastille.jpg");
+}
+
+#holocaust-card {
+  background-image: linear-gradient(
+      210deg,
+      rgba(132, 240, 206, 0) 0%,
+      rgba(132, 240, 206, 1) 100%
+    ),
+    url("https://www.ushmm.org/m/img/66935A-800x600.jpg");
+}
+
+#elements-card {
+  background-image: linear-gradient(
+      210deg,
+      rgba(132, 240, 206, 0) 0%,
+      rgba(132, 240, 206, 1) 100%
+    ),
+    url("https://npr.brightspotcdn.com/dims4/default/4df284c/2147483647/strip/true/crop/2400x1350+0+148/resize/1200x675!/quality/90/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Flegacy%2Fsites%2Fwuwm%2Ffiles%2F201912%2FAdobeStock_238869971.jpg");
+}
+
+#atoms-card {
+  background-image: linear-gradient(
+      210deg,
+      rgba(132, 240, 206, 0) 0%,
+      rgba(132, 240, 206, 1) 100%
+    ),
+    url("https://cdn.mos.cms.futurecdn.net/zmNSwMi3MFPJzkJSkVw6fL.jpg");
+}
+
+#catholicism-card {
+  background-image: linear-gradient(
+      210deg,
+      rgba(132, 240, 206, 0) 0%,
+      rgba(132, 240, 206, 1) 100%
+    ),
+    url("https://media.swncdn.com/cms/CCOM/60643-catholic-priest-communion-thinkstockphotos-88.1200w.tn.jpg");
+}
 .topic-card:hover {
   transform: scale(1.03);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);

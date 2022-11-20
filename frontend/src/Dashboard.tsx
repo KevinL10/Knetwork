@@ -8,12 +8,20 @@ const Dashboard = () => {
   const name = ReactSession.get("name");
   const token = ReactSession.get("authentication_token");
 
+  // from GPT3
   const topics = [
-    { name: "Math" },
-    { name: "Math" },
-    { name: "Math" },
-    { name: "Math" },
-    { name: "Math" },
+    { name: "Grammar" },
+    { name: "Geometry" },
+    { name: "Calculus" },
+    { name: "Real Analysis" },
+    { name: "Statistics" },
+    { name: "Electrostatics" },
+    { name: "Civil War" },
+    { name: "French Revolution" },
+    { name: "Holocaust" },
+    { name: "Elements" },
+    { name: "Atoms" },
+    { name: "Catholicism" },
   ];
 
   const recent = [{ name: "Math" }, { name: "English" }];
@@ -101,7 +109,10 @@ const Dashboard = () => {
                   key={i}
                 >
                   <Link to="/study" state={{ topic: topic.name.toLowerCase() }}>
-                    <div className="card topic-card" id="math-card">
+                    <div
+                      className="card topic-card"
+                      id={topic.name.replace(" ", "").toLowerCase() + "-card"}
+                    >
                       <h3 className="display">{topic.name}</h3>
                     </div>
                   </Link>
