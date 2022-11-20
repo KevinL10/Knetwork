@@ -1,7 +1,7 @@
 from flask import Flask
 from auth import auth
 from pymongo import MongoClient
-
+from flask_cors import CORS
 
 def create_app():
     app = Flask(__name__)
@@ -10,7 +10,7 @@ def create_app():
 
 
 app = create_app()
-
+CORS(app)
 
 @app.route("/")
 def index():
