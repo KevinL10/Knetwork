@@ -18,7 +18,7 @@ def login():
 
     if not username or not password:
         return jsonify({"status": "error", "message": "Missing username or password"})
-    if user_type not in ("Supervisor, Student"):
+    if user_type not in ("supervisor, student"):
         return jsonify({"status": "error", "message": "Invalid user type"})
 
     hashed_pw = sha256(password).hexdigest()
@@ -39,7 +39,7 @@ def signup():
 
     if not username or not password or not name:
         return jsonify({"status": "error", "message": "Missing username or password"})
-    if user_type not in ("Supervisor, Student"):
+    if user_type not in ("supervisor, student"):
         return jsonify({"status": "error", "message": "Invalid user type"})
 
     if users.count_documents({"username": username}):
