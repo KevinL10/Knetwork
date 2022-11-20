@@ -47,6 +47,7 @@ const Dashboard = () => {
                   {recent.map((topic, i) => (
                     <button
                       type="button"
+                      key={i}
                       className={
                         "btn mx-1 rounded-pill" +
                         (i % 2 === 0 ? " btn-primary" : " btn-secondary")
@@ -63,8 +64,11 @@ const Dashboard = () => {
           <>
             <h2 className="display  mt-5">Explore other topics</h2>
             <div className="grid topics-grid">
-              {topics.map((topic) => (
-                <div className="topic-card-wrapper g-col-12 g-col-md-6 g-col-lg-4">
+              {topics.map((topic, i) => (
+                <div
+                  className="topic-card-wrapper g-col-12 g-col-md-6 g-col-lg-4"
+                  key={i}
+                >
                   <Link to="/study" state={{ topic: topic.name.toLowerCase() }}>
                     <div className="card topic-card" id="math-card">
                       <h3 className="display">{topic.name}</h3>
