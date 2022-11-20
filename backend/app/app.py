@@ -25,7 +25,11 @@ def create_app():
     app.register_blueprint(settings, url_prefix="/api/settings/")
     CORS(app)
 
-    add_problems()
+    try:
+        add_problems()
+    except Exception as e:
+        print("Couldn't add problems", e)
+        pass
     return app
 
 

@@ -32,7 +32,9 @@ def find_topic_articles(topic):
         # score the relevance of the article
         result = classifier(content[:100], [topic])
 
-        if result["scores"][0] > 0.85:
+        # print(article, result)
+        if result["scores"][0] > 0.75:
+            print("FOUND", article)
             articles.append(article.replace("~", "/"))
 
     return articles

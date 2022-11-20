@@ -21,7 +21,17 @@ def get_exercise(user):
     else:
         articles = find_topic_articles(topic)
         articles = ["wiki_100/" + a for a in articles]
+        articles = list(set(articles))
         p = problems.find({"reference": {"$in": articles}}).limit(count)
+
+    ids = set()
+    filtered = []
+    for problem in p:
+        if str(problem["question"]) in ids:
+            continue
+
+        ids.add(str(problem["question"]))
+        filtered.append(problem)
 
     lst = [
         {
@@ -30,7 +40,7 @@ def get_exercise(user):
             "reference": problem["reference"],
             "problemId": str(problem["_id"]),
         }
-        for problem in p
+        for problem in filtered
     ]
 
     return jsonify(lst)
@@ -66,14 +76,14 @@ def mark_solved(user):
     if not id:
         return jsonify({"status": "error", "message": "Please provide a problem ID."})
 
-    problem = problems.find_one({"_id": id})
+    problem = problems.find_one({"_id": ObjectId(id)})
     if not problem:
         return jsonify({"status": "error", "message": "Invalid problem ID."})
 
     # add problem to user's solved list
     # TODO: check if problem doesn't already exist
     users.update_one(
-        {"username": user["username"]}, {"$push": {"solved": user["username"]}}
+        {"username": user["username"]}, {"$push": {"solved": id}}
     )
 
     return jsonify(

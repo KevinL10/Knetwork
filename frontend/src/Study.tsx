@@ -97,12 +97,9 @@ const Study = ({ topic }: { topic?: string }) => {
         })
         .then((data) => {
           setQuestions(data);
-<<<<<<< HEAD
-=======
         })
         .catch(() => {
           setError("Couldn't mark solved problems, please try again.");
->>>>>>> 3dc45bd5d81eded843ddf6ec2df1595d0e08db73
         });
     } catch {
       setError("Couldn't connect, please try again.");
