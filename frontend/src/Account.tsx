@@ -101,6 +101,36 @@ const Account = () => {
     }
   };
 
+  const fetchStudents = () => {
+    try {
+      fetch("http://localhost:5000/api/settings/students", {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+          "x-auth-token": token,
+        },
+      })
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error();
+          } else {
+            return res.json();
+          }
+        })
+        .then((data) => {
+          setStudents(data);
+        });
+    } catch {
+      setError("Couldn't connect, please try again.");
+    }
+  };
+
+  useEffect(() => {
+    if (isSupervisor) {
+      fetchStudents();
+    }
+  }, []);
+
   return (
     <>
       <div className="d-flex h-100">

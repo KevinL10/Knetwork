@@ -93,11 +93,7 @@ const Study = ({ topic }: { topic?: string }) => {
           }
         })
         .then((data) => {
-          if (data.status === "ok") {
-            setQuestions(data);
-          } else {
-            setError("Couldn't authenticate, please try another password.");
-          }
+          setQuestions(data);
         });
     } catch {
       setError("Couldn't connect, please try again.");
