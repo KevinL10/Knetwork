@@ -90,7 +90,7 @@ form {
     rgba(192, 247, 242, 1) 75%,
     var(--light-primary) 100%
   );
-  padding: 10rem 0;
+  padding: 10rem 0 0;
 }
 
 .sexy-button {
