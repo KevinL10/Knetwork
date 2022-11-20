@@ -94,7 +94,7 @@ const Study = ({ topic }: { topic?: string }) => {
         })
         .then((data) => {
           if (data.status === "ok") {
-            setQuestions((prevQuestions) => prevQuestions.concat(data));
+            setQuestions(data);
           } else {
             setError("Couldn't authenticate, please try another password.");
           }
