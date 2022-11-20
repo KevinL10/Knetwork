@@ -47,7 +47,7 @@ const Signup = () => {
           console.log(data);
           if (data.status === "success") {
             ReactSession.set("authentication_token", data.message);
-            ReactSession.set("name", data.name);
+            ReactSession.set("name", name);
             navigate("/dashboard");
           } else {
             setError("Couldn't create account.");
