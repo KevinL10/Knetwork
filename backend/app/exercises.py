@@ -10,7 +10,7 @@ exercises = Blueprint("exercises", __name__, template_folder="templates")
 @token_required
 def get_exercise(user):
     problem = problems.find_one()
-    topic = request.json.get("topic")
+    topic = request.args.get("topic")
     # TODO: apply spacy to find relevant exercises to the phrase
     return jsonify(
         {
@@ -18,6 +18,7 @@ def get_exercise(user):
             "question": problem["question"],
             "answer": problem["answer"],
             "reference": problem["reference"],
+            "problemId": problem["problem_id"]
         }
     )
 
@@ -26,11 +27,11 @@ def get_exercise(user):
 @exercises.route("/info", methods=["GET"])
 @token_required
 def get_info(user):
-    id = request.json.get("problemId")
+    id = request.args.get("problemId")
     if not id:
         return jsonify({"status": "error", "message": "Please provide a problem ID."})
 
-    problem = problems.find_one({"problem_id", id})
+    problem = problems.find_one({"problem_id": id})
     if not problem:
         return jsonify({"status": "error", "message": "Invalid problem ID."})
 
@@ -52,7 +53,7 @@ def mark_solved(user):
     if not id:
         return jsonify({"status": "error", "message": "Please provide a problem ID."})
 
-    problem = problems.find_one({"problem_id", id})
+    problem = problems.find_one({"problem_id": id})
     if not problem:
         return jsonify({"status": "error", "message": "Invalid problem ID."})
 
@@ -64,4 +65,17 @@ def mark_solved(user):
 
     return jsonify(
         {"status": "ok", "message": f"Added problem {id} to {user['username']}"}
+    )
+
+
+# Returns the solved problem IDs for a specific user
+@exercises.route("/solved", methods=["GET"])
+@token_required
+def get_solved(user):
+
+    return jsonify(
+        {
+            "status":"ok",
+            "solved": user["solved"],
+        }
     )
