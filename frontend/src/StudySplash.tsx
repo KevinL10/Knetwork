@@ -5,17 +5,17 @@ import "./dashboard.css";
 const StudySplash = () => {
   // from GPT3
   const topics = [
-    { name: "Grammar" },
+    { name: "Geography" },
+    { name: "Species" },
     { name: "Geometry" },
+    { name: "Canada" },
     { name: "Calculus" },
-    { name: "Real Analysis" },
-    { name: "Statistics" },
-    { name: "Electrostatics" },
-    { name: "Civil War" },
-    { name: "French Revolution" },
+    { name: "Games" },
+    { name: "Germany" },
+    { name: "United States" },
     { name: "Holocaust" },
-    { name: "Elements" },
-    { name: "Atoms" },
+    { name: "Electrostatics" },
+    { name: "Mantis" },
     { name: "Catholicism" },
   ];
 

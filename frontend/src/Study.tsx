@@ -57,6 +57,9 @@ const Study = ({ topic }: { topic?: string }) => {
               "Couldn't authenticate, please log out and in and try again."
             );
           }
+        })
+        .catch(() => {
+          setError("Couldn't mark solved problems, please try again.");
         });
     } catch {
       setError("Couldn't connect, please try again.");
@@ -93,11 +96,10 @@ const Study = ({ topic }: { topic?: string }) => {
           }
         })
         .then((data) => {
-          if (data.status === "ok") {
-            setQuestions(data);
-          } else {
-            setError("Couldn't authenticate, please try another password.");
-          }
+          setQuestions(data);
+        })
+        .catch(() => {
+          setError("Couldn't mark solved problems, please try again.");
         });
     } catch {
       setError("Couldn't connect, please try again.");
@@ -112,11 +114,7 @@ const Study = ({ topic }: { topic?: string }) => {
           <h1 className="display text-center">
             {topic ? "Studying " + topic + "!" : "Let's learn!"}
           </h1>
-          {error ? (
-            <p className="text-muted">
-              There was a problem fetching your problems...
-            </p>
-          ) : null}
+          {error ? <p className="text-muted">{error}</p> : null}
           <div
             className="mt-4"
             style={{

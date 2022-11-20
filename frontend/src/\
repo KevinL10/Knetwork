@@ -56,22 +56,22 @@
     url("https://www.thoughtco.com/thmb/irSi_hwriBZL3QbGsCiiNsgaSWI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/calculus-on-blackboard-79338340-5be4695946e0fb0026d6856f.jpg");
 }
 
-#games-card {
+#realanalysis-card {
   background-image: linear-gradient(
       210deg,
       rgba(132, 240, 206, 0) 0%,
       rgba(132, 240, 206, 1) 100%
     ),
-    url("https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/most-popular-video-games-of-2022-1642612227.png");
+    url("https://pll.harvard.edu/sites/default/files/styles/header/public/course/asset-v1_HarvardX%2BCalcAPL1x%2B2T2017%2Btype%40asset%2Bblock%40TITLE-Calculus-Applied-2120x1192-NO-SPOTLIGHT%202.png?itok=crWwjmVi");
 }
 
-#canada-card {
+#statistics-card {
   background-image: linear-gradient(
       210deg,
       rgba(132, 240, 206, 0) 0%,
       rgba(132, 240, 206, 1) 100%
     ),
-    url("https://pbs.twimg.com/profile_images/537625264277028864/14jJPXpX_400x400.png");
+    url("https://images.theconversation.com/files/236859/original/file-20180918-158240-1jd9gm6.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=926&fit=clip");
 }
 
 #electrostatics-card {
@@ -83,22 +83,22 @@
     url("https://2.bp.blogspot.com/-tUJ3gyblJoQ/VwCFqy5dYzI/AAAAAAAAASg/2zVByJ-KKPk9NTz-Vx5evWnykPaunXhgw/s1600/bobinas%2B2.jpg");
 }
 
-#germany-card {
+#civilwar-card {
   background-image: linear-gradient(
       210deg,
       rgba(132, 240, 206, 0) 0%,
       rgba(132, 240, 206, 1) 100%
     ),
-    url("https://cdn.internationalliving.com/wp-content/uploads/2020/02/Germany-1.jpg");
+    url("https://cdn.britannica.com/13/149613-050-C0B0B8D5/Battle-of-Gettysburg-Currier-lithograph-Ives-July-3-1863.jpg");
 }
 
-#unitedstates-card {
+#frenchrevolution-card {
   background-image: linear-gradient(
       210deg,
       rgba(132, 240, 206, 0) 0%,
       rgba(132, 240, 206, 1) 100%
     ),
-    url("https://geology.com/world/united-states-map-with-state-capitals.gif");
+    url("https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Anonymous_-_Prise_de_la_Bastille.jpg/1200px-Anonymous_-_Prise_de_la_Bastille.jpg");
 }
 
 #holocaust-card {
@@ -116,16 +116,16 @@
       rgba(132, 240, 206, 0) 0%,
       rgba(132, 240, 206, 1) 100%
     ),
-    url("https://w.ndtvimg.com/sites/3/2020/10/30150648/660x330-endangered-species.jpg");
+    url("https://images.unsplash.com/photo-1579762714453-51d9913984e2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c3BlY2llc3xlbnwwfHwwfHw%3D&w=1000&q=80");
 }
 
-#mantis-card {
+#atoms-card {
   background-image: linear-gradient(
       210deg,
       rgba(132, 240, 206, 0) 0%,
       rgba(132, 240, 206, 1) 100%
     ),
-    url("https://inaturalist-open-data.s3.amazonaws.com/photos/180063407/original.jpg");
+    url("https://cdn.mos.cms.futurecdn.net/zmNSwMi3MFPJzkJSkVw6fL.jpg");
 }
 
 #catholicism-card {
