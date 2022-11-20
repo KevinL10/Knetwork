@@ -29,6 +29,7 @@ const Study = ({ topic }: { topic?: string }) => {
   >([]);
   const [solved, setSolved] = useState<Array<string>>([]);
   const [error, setError] = useState("");
+  const [loaded, setLoaded] = useState(false);
 
   const markSolved = (i: string) => {
     try {
@@ -97,6 +98,7 @@ const Study = ({ topic }: { topic?: string }) => {
         })
         .then((data) => {
           setQuestions(data);
+          setLoaded(true);
         })
         .catch(() => {
           setError("Couldn't mark solved problems, please try again.");
@@ -112,7 +114,9 @@ const Study = ({ topic }: { topic?: string }) => {
         <Sidebar selected={1} />
         <div className="container mt-5 pt-5 px-5 overflow-auto">
           <h1 className="display text-center">
-            {topic ? "Studying " + topic + "!" : "Let's learn!"}
+            {location.state.topic
+              ? "Studying " + location.state.topic + "!"
+              : "Let's learn!"}
           </h1>
           {error ? <p className="text-muted">{error}</p> : null}
           <div
@@ -137,7 +141,11 @@ const Study = ({ topic }: { topic?: string }) => {
               />
             ))
           ) : (
-            <p className="mb-3 display">Loading questions...</p>
+            <p className="mb-3 display">
+              {!loaded
+                ? "Loading questions..."
+                : "No questions for " + location.state.topic}
+            </p>
           )}
           <button
             className="btn btn-light rounded-pill mb-5"

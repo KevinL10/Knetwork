@@ -48,6 +48,11 @@ const Signup = () => {
           if (data.status === "success") {
             ReactSession.set("authentication_token", data.message);
             ReactSession.set("name", name);
+            ReactSession.set("username", username);
+            ReactSession.set(
+              "userType",
+              isSupervisor ? "supervisor" : "student"
+            );
             navigate("/dashboard");
           } else {
             setError("Couldn't create account.");
