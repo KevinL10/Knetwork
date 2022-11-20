@@ -1,0 +1,40 @@
+.carousel-item {
+  padding: 0 8rem 3rem;
+}
+
+.study-card {
+  padding: 1rem 2rem;
+  position: relative;
+}
+
+.study-card-solved {
+  background: rgb(192, 247, 242);
+  background: linear-gradient(
+    210deg,
+    rgba(192, 247, 242, 1) 0%,
+    rgba(132, 240, 206, 1) 100%
+  );
+}
+
+summary {
+  font-size: 18px;
+}
+
+.study-card-bq {
+  border-left: 2px solid grey;
+  padding-left: 1rem;
+  margin-left: 5px;
+  margin-top: 0.25rem;
+}
+
+.study-card-badge {
+  border-radius: 100%;
+  width: 2rem;
+  height: 2rem;
+  position: absolute;
+  top: -1rem;
+  transform: translateX(-50%);
+  right: -2rem;
+  background-color: var(--light-primary);
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}

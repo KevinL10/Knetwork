@@ -36,7 +36,13 @@ const Signup = () => {
           userType: isSupervisor ? "supervisor" : "student",
         }),
       })
-        .then((res) => res.json())
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error();
+          } else {
+            return res.json();
+          }
+        })
         .then((data) => {
           console.log(data);
           if (data.status === "success") {

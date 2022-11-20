@@ -5,20 +5,19 @@ import "./account.css";
 import { useNavigate } from "react-router-dom";
 
 const Account = () => {
-  const [isSupervisor, setIsSupervisor] = useState(false);
-  const [students, setStudents] = useState<string[]>([
-    "kewbish",
-    "kevergarden",
-  ]);
-  const [username, setUsername] = useState("");
+  const name = ReactSession.get("name");
+  const username = ReactSession.get("username");
+  const isSupervisor = ReactSession.get("userType") === "supervisor";
+  const [students, setStudents] = useState<string[]>([]);
   const [supervisor, setSupervisor] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
+  const [error, setError] = useState("");
+  const [perror, setPerror] = useState("");
+  const token = ReactSession.get("authentication_token");
 
   useEffect(() => {
-    const token = ReactSession.get("authentication_token");
-
     if (!token) {
       navigate("/");
     }
@@ -26,7 +25,81 @@ const Account = () => {
     // make API call
   }, []);
 
-  const name = ReactSession.get("name");
+  const addSupervisor = () => {
+    if (!supervisor) {
+      setError("Please enter a supervisor username.");
+      return;
+    }
+    try {
+      fetch("http://localhost:5000/api/settings/set-supervisor", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          "x-auth-token": token,
+        },
+        body: JSON.stringify({
+          username,
+          supervisor,
+        }),
+      })
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error();
+          } else {
+            return res.json();
+          }
+        })
+        .then((data) => {
+          if (data.status === "success") {
+            ReactSession.set("supervisor", supervisor);
+            setError("");
+          } else {
+            setError("Couldn't authenticate, please try again.");
+          }
+        });
+    } catch {
+      setError("Couldn't connect, please try again.");
+    }
+  };
+
+  const changePassword = () => {
+    if (!password || !confirmPassword) {
+      setPerror("Please enter a password.");
+      return;
+    } else if (password !== confirmPassword) {
+      setPerror("Passwords do not match.");
+      return;
+    }
+    try {
+      fetch("http://localhost:5000/api/settings/set-supervisor", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          "x-auth-token": token,
+        },
+        body: JSON.stringify({
+          username,
+        }),
+      })
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error();
+          } else {
+            return res.json();
+          }
+        })
+        .then((data) => {
+          if (data.status === "success") {
+            ReactSession.set("supervisor", supervisor);
+            setError("");
+          } else {
+            setError("Couldn't authenticate, please try again.");
+          }
+        });
+    } catch {
+      setError("Couldn't connect, please try again.");
+    }
+  };
 
   return (
     <>
@@ -45,10 +118,11 @@ const Account = () => {
                     id="exampleInputEmail1"
                     aria-describedby="emailHelp"
                     placeholder="... loading username"
+                    value={username}
                     readOnly
                   />
                 </div>
-                <div className="text-left">
+                {/**<div className="text-left">
                   <p className="display">Change password</p>
                   <div className="form-group">
                     <label htmlFor="exampleInputPassword1">New password</label>
@@ -77,12 +151,12 @@ const Account = () => {
                   <button className="btn btn-primary rounded-pill">
                     Change password
                   </button>
-                </div>
+                </div>**/}
                 {isSupervisor ? (
                   <div className="text-left mt-3">
                     <p className="display">Students</p>
                     <div className="d-flex">
-                      {students ? (
+                      {students?.length ? (
                         students.map((student: string, i: number) => (
                           <span
                             className={
@@ -92,6 +166,7 @@ const Account = () => {
                                 : " badge-secondary")
                             }
                             style={{ fontSize: "80%" }}
+                            key={i}
                           >
                             {student} (@{student})
                           </span>
@@ -117,12 +192,18 @@ const Account = () => {
                         />
                       </div>
 
-                      <button className="btn btn-primary rounded-pill mr-2">
+                      <button
+                        className="btn btn-primary rounded-pill mr-2"
+                        onClick={addSupervisor}
+                      >
                         Set supervisor
                       </button>
-                      <button className="btn btn-secondary rounded-pill">
+                      {error ? (
+                        <div className="invalid-feedback">{error}</div>
+                      ) : null}
+                      {/**<button className="btn btn-secondary rounded-pill">
                         Remove supervisor
-                      </button>
+                      </button>**/}
                     </div>
                   </>
                 )}
