@@ -1,0 +1,7 @@
+.nav-link.active {
+  color: grey !important;
+}
+
+p {
+  margin-bottom: 0 !important;
+}

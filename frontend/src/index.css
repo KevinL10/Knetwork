@@ -1,7 +1,16 @@
+html {
+  height: 100%;
+}
+
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+}
+
+#root {
+  height: 100%;
 }
 
 code {
@@ -11,13 +20,13 @@ code {
 
 @font-face {
   font-family: "Visby";
-  src: url("../assets/visby/VisbyRegular.woff");
+  src: url("../public/assets/visby/VisbyRegular.woff");
   font-weight: 400;
 }
 
 @font-face {
   font-family: "Visby";
-  src: url("../assets/visby/VisbyBold.woff");
+  src: url("../public/assets/visby/VisbyBold.woff");
   font-weight: 700;
 }
 

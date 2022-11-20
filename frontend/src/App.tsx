@@ -1,14 +1,19 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Choices from "./Choices";
-import Home from "./Home";
+import { ReactSession } from "react-client-session";
+import Signup from "./Signup";
+import Login from "./Login";
+import Dashboard from "./Dashboard";
 
 function App() {
+  ReactSession.setStoreType("localStorage");
+
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/choices" element={<Choices />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </Router>
   );
